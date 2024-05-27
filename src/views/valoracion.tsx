@@ -98,7 +98,6 @@ import React, { useEffect, useState } from "react";
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 import { Box } from "@mui/material";
 import Header from "@/components/Header";
@@ -114,15 +113,14 @@ interface Valoracion {
 
 const Valoracion: React.FC = () => {
   const [valoraciones, setValoraciones] = useState<Valoracion[]>([]);
-  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
-  const [currentValoracionId, setCurrentValoracionId] = useState<number | null>(
-    null,
-  );
+  // const [setOpenEditModal] = useState<boolean>(false);
+  // const [setCurrentValoracionId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchValoraciones = () => {
       axios
-        .get("http://localhost:5000/valoracion")
+        // .get("http://localhost:5000/valoracion")
+        .get("https://backend-jt8e.onrender.com/valoraciones/")
         .then((response) => {
           const data = response.data.valoraciones as Valoracion[];
           setValoraciones(data);
@@ -137,7 +135,8 @@ const Valoracion: React.FC = () => {
 
   const handleDelete = (id: number) => {
     axios
-      .delete(`http://localhost:5000/valoracion/${id}`)
+      // .delete(`http://localhost:5000/valoracion/${id}`)
+      .delete(`http://backend-jt8e.onrender.com/valoracion/${id}`)
       .then(() => {
         setValoraciones((prevValoraciones) =>
           prevValoraciones.filter((valoracion) => valoracion.id !== id),
@@ -148,10 +147,10 @@ const Valoracion: React.FC = () => {
       });
   };
 
-  const handleEdit = (id: number) => {
-    setCurrentValoracionId(id);
-    setOpenEditModal(true);
-  };
+  // const handleEdit = (id: number) => {
+  //   setCurrentValoracionId(id);
+  //   setOpenEditModal(true);
+  // };
 
   const columns: GridColDef[] = [
     // { field: "id", headerName: "ID", width: 90 },
@@ -167,9 +166,9 @@ const Valoracion: React.FC = () => {
       width: 150,
       renderCell: (params: GridRenderCellParams) => (
         <>
-          <IconButton onClick={() => handleEdit(params.id as number)}>
-            <EditIcon />
-          </IconButton>
+          {/* <IconButton onClick={() => handleEdit(params.id as number)}> */}
+          {/*   <EditIcon /> */}
+          {/* </IconButton> */}
           <IconButton onClick={() => handleDelete(params.id as number)}>
             <DeleteIcon />
           </IconButton>

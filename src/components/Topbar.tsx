@@ -1,5 +1,5 @@
 import { Box, IconButton, useTheme, MenuItem, Menu } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useState, MouseEvent } from "react";
 import { ColorModeContext, tokens } from "./theme";
 import { useNavigate } from "react-router-dom";
 import InputBase from "@mui/material/InputBase";
@@ -12,7 +12,8 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const Topbar = () => {
   const theme = useTheme();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  // const [anchorEl, setAnchorEl] = useState(null);
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,17 +23,21 @@ const Topbar = () => {
     console.log("Realizando búsqueda con el término:", searchQuery);
   };
 
-  const handleMenuClick = (event) => {
+  // const handleMenuClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  const handleMenuClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:5000/logout", {
+      // await fetch("http://localhost:5000/logout", {
+      await fetch("https://backend-jt8e.onrender.com/logout", {
         method: "POST",
       });
 
@@ -48,7 +53,7 @@ const Topbar = () => {
     <Box display="flex" justifyContent="space-between" p={2}>
       <Box
         display="flex"
-        backgroundColor={colors.primary[400]}
+        // backgroundColor={colors.primary[400]}
         borderRadius="3px"
         style={{ backgroundColor: colors.primary[400] }} // Aplicamos el color de fondo desde los tokens de tema
       >

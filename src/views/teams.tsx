@@ -15,7 +15,6 @@ import Header from "@/components/Header";
 import { ArrowCircleDown, ArrowCircleUp } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-// Define el tipo para el cliente
 interface Cliente {
   id_cliente: number;
   nombre: string;

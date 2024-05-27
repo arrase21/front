@@ -8,11 +8,11 @@ import axios from "axios";
 interface FormValues {
   nombre: string;
   apellido: string;
-  dni: number;
+  dni: string;
   correo: string;
-  telefono: number;
+  telefono: string;
   contrasena: string;
-  id_rol: number; // Nuevo campo para el rol
+  id_rol: number;
 }
 
 const Form = () => {
